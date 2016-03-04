@@ -6,6 +6,12 @@ class Counter:
 	def __init__(self):
 		pass
 
+	def isUpperLetter(self, char):
+		if ord('A') <= ord(char) <= ord('Z'):
+			return True
+		elif ord('a') <= ord(char) <= ord('z'):
+			return False
+
 	def get_mode(self):
 		while True:
 			print("\n+--------------------------------------------------------------+")
@@ -23,7 +29,8 @@ class Counter:
 
 	def get_message(self):
 		print("Bitte Text eingeben: ")
-		return input().lower()
+		got = input()
+		return got
 
 	def get_key(self):
 		while True:
@@ -43,6 +50,8 @@ class Counter:
 		# print ("Bitte genau 26 Zeichen angeben")
 
 	def get_translated_message(self, mode, message, key):
+		# message = message.lower()
+
 		if mode[0] == '3' or mode[0] == '4':
 			key = -key
 		translated = ''
@@ -52,10 +61,16 @@ class Counter:
 				num = ord(symbol)
 				num += key
 
-				if num > ord('z'):
-					num -= 26
-				elif num < ord('a'):
-					num += 26
+				if self.isUpperLetter(self, symbol):
+					if num > ord('Z'):
+						num -= 26
+					elif num < ord('A'):
+						num += 26
+				elif not self.isUpperLetter(self, symbol):
+					if num > ord('z'):
+						num -= 26
+					elif num < ord('a'):
+						num += 26
 
 				translated += chr(num)
 			else:
